@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: path.resolve(__dirname, '..', 'src/index.tsx'),
+  entry: path.resolve(__dirname, '..', 'src/entry.tsx'),
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
@@ -16,6 +16,13 @@ module.exports = {
             loader: 'babel-loader',
           },
         ],
+      },
+      {
+        test: /\.m?js/,
+        type: 'javascript/auto',
+        resolve: {
+          fullySpecified: false,
+        },
       },
       {
         test: /\.css$/,
@@ -34,6 +41,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', './build'),
     filename: 'bundle.js',
+    publicPath: 'http://localhost:4000/',
   },
   plugins: [
     new HtmlWebpackPlugin({
