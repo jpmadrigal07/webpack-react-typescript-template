@@ -1,10 +1,14 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { ModuleFederationPlugin } = require('webpack').container
 
 module.exports = {
   entry: path.resolve(__dirname, '..', 'src/entry.tsx'),
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, '..', 'src'),
+    },
   },
   module: {
     rules: [
@@ -44,6 +48,13 @@ module.exports = {
     publicPath: 'http://localhost:4000/',
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'wrapper',
+      filename: 'remoteEntry.js',
+      remotes: {},
+      exposes: {},
+      shared: {},
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', 'public/index.html'),
     }),

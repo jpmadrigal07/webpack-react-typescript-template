@@ -20,9 +20,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noImplicitAny": false,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"]
+      "@/components/*": ["./components/*"],
+      "@/pages/*": ["./pages/*"],
+      "@/utils/*": ["./layouts/*"],
     },
   },
   "include": ["src/**/*"],
